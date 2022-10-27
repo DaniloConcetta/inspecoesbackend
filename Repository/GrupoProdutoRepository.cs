@@ -12,12 +12,14 @@ namespace Inspecoes.Repository
     {
         public GrupoProdutoRepository(ApplicationDbContext context) : base(context) { }
 
+        /* exemplo
         public async Task<GrupoProduto> ObterGruposProdutosGrupoPergunta(int id)
         {
-            return null; /*await Db.Perguntas.AsNoTracking()
+            return await Db.Perguntas.AsNoTracking()
                    .Include(c => c.GrupoPergunta)
-                   .FirstOrDefaultAsync(c => c.GrupoPerguntaId == id);*/
+                   .FirstOrDefaultAsync(c => c.GrupoPerguntaId == id);
         }
+        */
 
 
     }

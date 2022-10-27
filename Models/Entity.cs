@@ -5,11 +5,13 @@ namespace Inspecoes.Models
 {
     public abstract class Entity
     {
-        //protected Entity()
-        //{            Id = Id. id.New();        }
+        protected Entity()
+        {
+            Id = Guid.NewGuid();
+        }
+        
+        public Guid Id { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
         public DateTime? DataCadastro { get; set; }
         public DateTime? DataAtualizacao { get; set; }
 

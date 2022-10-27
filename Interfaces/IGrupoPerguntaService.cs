@@ -8,11 +8,11 @@ namespace Inspecoes.Interfaces
 {
     public interface IGrupoPerguntaService : IDisposable
     {
-        Task Adicionar(GrupoPergunta model);
-        Task Atualizar(GrupoPergunta model);
-        Task Remover(int id);
         Task<List<GrupoPergunta>> GetAll();
         Task<GrupoPergunta> GetById(int id);
+        Task Insert(GrupoPergunta model);
+        Task Update(GrupoPergunta model);
+        Task Delete(int id);
 
         Task<GrupoPergunta> GetDetailsById(int id);
         //   Task<IPagedList<GrupoPergunta>> GetPagedList(FilteredPagedListParameters parameters);

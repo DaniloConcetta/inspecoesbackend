@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Inspecoes.Models
 {
-    public class GrupoProduto : Entity
+    public class GrupoProduto : AbstractEntity
     {
 
         public GrupoProduto() { }

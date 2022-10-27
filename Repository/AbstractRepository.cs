@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
-//using Inspecoes.DTOs;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Linq.Expressions;
+using System.Linq.Dynamic.Core;
+
+using Inspecoes.DTOs;
 using Inspecoes.Interfaces;
 using Inspecoes.Models;
-
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Dynamic.Core;
-using Microsoft.EntityFrameworkCore.Storage;
-
 using Inspecoes.Data;
 
 namespace Inspecoes.Repository
 {
-    public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity> where TEntity : Entity, new()
+    public abstract class AbstractRepository<TEntity> : IAbstractRepository<TEntity> where TEntity : AbstractEntity, new()
     {
         protected readonly ApplicationDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
@@ -83,7 +82,6 @@ namespace Inspecoes.Repository
             return await DbSet.ToListAsync();
         }
 
-        /*
         public async Task<IPagedList<TEntity>> GetPagedList(Expression<Func<TEntity, bool>> predicate, PagedListParameters parameters, List<string> stringIncludes = null, params Expression<Func<TEntity, object>>[] includes)
         {
             var includedData = DbSet.AsQueryable();
@@ -101,23 +99,24 @@ namespace Inspecoes.Repository
 
             return await PagedList<TEntity>.ToPagedList(dadosFiltrados, parameters.CurrentPage, parameters.PageSize);
         }
-
-        */
-
         public virtual async Task Insert(TEntity entity)
         {
             DbSet.Add(entity);
             await SaveChanges();
-
         }
 
         public virtual async Task Update(TEntity entity)
         {
             DbSet.Update(entity);
-
             await SaveChanges();
         }
 
+        public virtual async Task UpdateModified(TEntity entity)
+        {
+            DbSet.Attach(entity);
+            Db.Entry(entity).State = EntityState.Modified;
+            await SaveChanges();
+        }
         public virtual void InsertNoAsync(TEntity entity)
         {
             DbSet.Add(entity);

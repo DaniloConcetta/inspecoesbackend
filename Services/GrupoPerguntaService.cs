@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using Inspecoes.Interfaces;
-
 using Inspecoes.Models;
 
 
@@ -37,31 +36,8 @@ namespace Inspecoes.Services
             return _repository.GetById(id);
         }
 
-        public async Task<GrupoPergunta> GetDetailsById(int id)
-        {
-            GrupoPergunta grupoPergunta;
-            grupoPergunta = new GrupoPergunta();
-            grupoPergunta = await _repository.GetDetailsById(id);
-            
-            grupoPergunta.Perguntas = new List<Pergunta>();
-            foreach (var grupoPerguntaPergunta in grupoPergunta.GrupoPerguntaPerguntas)
-            {
-                Pergunta pergunta = new Pergunta();
-                pergunta = await _perguntaRepository.GetById(grupoPerguntaPergunta.PerguntaId);
-                grupoPergunta.Perguntas.Add(pergunta);
-            }
-            
-            grupoPergunta.GruposProdutos = new List<GrupoProduto>();
-            foreach (var grupoPerguntaGrupoProduto in grupoPergunta.GrupoPerguntaGruposProdutos)
-            {
-                GrupoProduto grupoProduto = new GrupoProduto();
-                grupoProduto = await _grupoprodutoRepository.GetById(grupoPerguntaGrupoProduto.GrupoProdutoId);
-                grupoPergunta.GruposProdutos.Add(grupoProduto);
-            }
-            
-            return grupoPergunta;
-        }
-        public async Task Adicionar(GrupoPergunta model)
+
+        public async Task Insert(GrupoPergunta model)
         {
 
             //if (!RunValidation(new CriterioValidation(), criterio)) return; //
@@ -75,7 +51,7 @@ namespace Inspecoes.Services
             await _repository.Insert(model);
         }
 
-        public async Task Atualizar(GrupoPergunta model)
+        public async Task Update(GrupoPergunta model)
         {
             //     if (_criterioRepository.Search(f => f.Observacao == criterio.Observacao && f.Id != criterio.Id).Result.Any())
             //    {
@@ -86,7 +62,7 @@ namespace Inspecoes.Services
             await _repository.Update(model);
         }
 
-        public async Task Remover(int id)
+        public async Task Delete(int id)
         {
             await _repository.Delete(id);
         }
@@ -99,6 +75,31 @@ namespace Inspecoes.Services
             ), parameters);
         }
         */
+
+        public async Task<GrupoPergunta> GetDetailsById(int id)
+        {
+            GrupoPergunta grupoPergunta;
+            grupoPergunta = new GrupoPergunta();
+            grupoPergunta = await _repository.GetDetailsById(id);
+
+            grupoPergunta.Perguntas = new List<Pergunta>();
+            foreach (var grupoPerguntaPergunta in grupoPergunta.GrupoPerguntaPerguntas)
+            {
+                Pergunta pergunta = new Pergunta();
+                pergunta = await _perguntaRepository.GetById(grupoPerguntaPergunta.PerguntaId);
+                grupoPergunta.Perguntas.Add(pergunta);
+            }
+
+            grupoPergunta.GruposProdutos = new List<GrupoProduto>();
+            foreach (var grupoPerguntaGrupoProduto in grupoPergunta.GrupoPerguntaGruposProdutos)
+            {
+                GrupoProduto grupoProduto = new GrupoProduto();
+                grupoProduto = await _grupoprodutoRepository.GetById(grupoPerguntaGrupoProduto.GrupoProdutoId);
+                grupoPergunta.GruposProdutos.Add(grupoProduto);
+            }
+
+            return grupoPergunta;
+        }
 
         public override void Dispose()
         {

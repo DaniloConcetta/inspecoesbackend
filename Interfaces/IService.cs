@@ -6,11 +6,11 @@ using Inspecoes.Models;
 
 namespace Inspecoes.Interfaces
 {
-    public interface IService<TEntity> : IDisposable where TEntity : Entity
+    public interface IService<TEntity> : IDisposable where TEntity : AbstractEntity
     {
-        //Task Adicionar(TEntity entity);
-        Task<TEntity> GetById(int id);
         Task<List<TEntity>> GetAll();
+        Task<TEntity> GetById(int id);
+        //Task Adicionar(TEntity entity);
         //Task Atualizar(TEntity entity);
         //Task Remover(Guid id);
         //Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);

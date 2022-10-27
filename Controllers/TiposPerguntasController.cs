@@ -3,106 +3,98 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 using Inspecoes.Data;
 using Inspecoes.Models;
+using Inspecoes.Interfaces;
+using Inspecoes.DTOs;
 
 namespace Inspecoes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class TiposPerguntasController : ControllerBase
+    [ApiVersion("1.0")]
+    [Route("api/v{ver:apiVersion}/[controller]")]
+    public class TiposPerguntasController : MainController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ITipoPerguntaService _service;
+        private readonly IMapper _mapper;
 
-        public TiposPerguntasController(ApplicationDbContext context)
+        public TiposPerguntasController(ITipoPerguntaService service,
+                                        IMapper mapper,
+                                        INotifier notificador,
+                                        IUser user) : base(notificador, user)
         {
-            _context = context;
+            _service = service;
+            _mapper = mapper;
         }
 
-        // GET: api/TiposPerguntas
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoPergunta>>> GetTiposPerguntas()
+        [HttpGet("get-all")]
+        public async Task<ActionResult<IEnumerable<TipoPergunta>>> GetAllMe()
         {
-            return await _context.TiposPerguntas.ToListAsync();
+            return await _service.GetAll();
         }
 
-        // GET: api/TiposPerguntas/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TipoPergunta>> GetTipoPergunta(int id)
+        [AllowAnonymous]
+        [HttpGet()]
+        public async Task<ActionResult<IPagedList<TipoPergunta>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
-            var tipoPergunta = await _context.TiposPerguntas.FindAsync(id);
+            var pagedList = await _service.GetPagedList(parameters);
+            return CustomResponse(_mapper.Map<IPagedList<TipoPergunta>>(pagedList));
+        }
 
-            if (tipoPergunta == null)
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<TipoPergunta>> GetByIdMe(int id)
+        {
+            //var criterio = await _criterioService.GetById(id); //await _context.Criterios.FindAsync(id);
+            var model = await _service.GetById(id);
+
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return tipoPergunta;
+            return model;
         }
 
-        // PUT: api/TiposPerguntas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTipoPergunta(int id, TipoPergunta tipoPergunta)
+        [HttpPost]
+        public async Task<ActionResult<TipoPergunta>> PostMe(TipoPergunta model)
         {
-            if (id != tipoPergunta.Id)
+            await _service.Insert(model);
+            return model;
+        }
+
+        [HttpPut("{id:int}")] // PUT: api/Criterios/5
+        public async Task<IActionResult> PutMe(int id, TipoPergunta model)
+        {
+            if (id != model.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tipoPergunta).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.Update(model);
+
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TipoPerguntaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
-        // POST: api/TiposPerguntas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<TipoPergunta>> PostTipoPergunta(TipoPergunta tipoPergunta)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteMe(int id)
         {
-            _context.TiposPerguntas.Add(tipoPergunta);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTipoPergunta", new { id = tipoPergunta.Id }, tipoPergunta);
-        }
-
-        // DELETE: api/TiposPerguntas/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTipoPergunta(int id)
-        {
-            var tipoPergunta = await _context.TiposPerguntas.FindAsync(id);
-            if (tipoPergunta == null)
-            {
-                return NotFound();
-            }
-
-            _context.TiposPerguntas.Remove(tipoPergunta);
-            await _context.SaveChangesAsync();
-
+            await _service.Delete(id);
             return NoContent();
         }
 
-        private bool TipoPerguntaExists(int id)
-        {
-            return _context.TiposPerguntas.Any(e => e.Id == id);
-        }
     }
 }

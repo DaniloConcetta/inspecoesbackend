@@ -36,10 +36,12 @@ namespace Inspecoes.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
 
                     b.Property<string>("Observacao")
                         .IsRequired()
@@ -60,10 +62,12 @@ namespace Inspecoes.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
 
                     b.Property<int>("GrupoPerguntaId")
                         .HasColumnType("int");
@@ -89,10 +93,12 @@ namespace Inspecoes.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
 
                     b.Property<int>("GrupoPerguntaId")
                         .HasColumnType("int");
@@ -121,10 +127,12 @@ namespace Inspecoes.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("varchar(100)");
@@ -152,10 +160,12 @@ namespace Inspecoes.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("varchar(100)");
@@ -186,10 +196,12 @@ namespace Inspecoes.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<DateTime?>("DataAtualizacao")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
 
                     b.Property<DateTime?>("DataCadastro")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -203,7 +215,7 @@ namespace Inspecoes.Migrations
             modelBuilder.Entity("Inspecoes.Models.GrupoPerguntaGrupoProduto", b =>
                 {
                     b.HasOne("Inspecoes.Models.GrupoPergunta", "GrupoPergunta")
-                        .WithMany("GruposProdutos")
+                        .WithMany("GrupoPerguntaGruposProdutos")
                         .HasForeignKey("GrupoPerguntaId")
                         .IsRequired();
 
@@ -220,7 +232,7 @@ namespace Inspecoes.Migrations
             modelBuilder.Entity("Inspecoes.Models.GrupoPerguntaPergunta", b =>
                 {
                     b.HasOne("Inspecoes.Models.GrupoPergunta", "GrupoPergunta")
-                        .WithMany("Perguntas")
+                        .WithMany("GrupoPerguntaPerguntas")
                         .HasForeignKey("GrupoPerguntaId")
                         .IsRequired();
 
@@ -245,9 +257,9 @@ namespace Inspecoes.Migrations
 
             modelBuilder.Entity("Inspecoes.Models.GrupoPergunta", b =>
                 {
-                    b.Navigation("GruposProdutos");
+                    b.Navigation("GrupoPerguntaGruposProdutos");
 
-                    b.Navigation("Perguntas");
+                    b.Navigation("GrupoPerguntaPerguntas");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoProduto", b =>

@@ -1,16 +1,16 @@
-﻿using Inspecoes.Interfaces;
-using Inspecoes.Models;
-using Inspecoes.Notifications;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Inspecoes.Interfaces;
+using Inspecoes.Models;
+using Inspecoes.Notifications;
 
 namespace Inspecoes.Services
 {
-    public abstract class AbstractBaseService<TEntity> : IService<TEntity> where TEntity : Entity
+    public abstract class AbstractBaseService<TEntity> : IService<TEntity> where TEntity : AbstractEntity
     {
         private readonly INotifier _notifier;
         private readonly IAbstractRepository<TEntity> _repository;
@@ -24,7 +24,7 @@ namespace Inspecoes.Services
         {
             foreach (var error in validationResult.Errors)
             {
-                Notify(error.ErrorMessage); //023.avi14:32
+                Notify(error.ErrorMessage); //xttps://desenvolvedor.io/curso/dominando-o-asp-net-mvc-core/desenvolvendo-uma-aplicacao-mvc-core-completa/validando-as-entidades-de-negocio ...023.avi14:32
             }
         }
 
@@ -33,7 +33,7 @@ namespace Inspecoes.Services
             _notifier.Handle(new Notification(mensagem));
         }
 
-        protected bool RunValidation<TV, TE>(TV validacao, TE entidade) where TV : AbstractValidator<TE> where TE : Entity
+        protected bool RunValidation<TV, TE>(TV validacao, TE entidade) where TV : AbstractValidator<TE> where TE : AbstractEntity
         {
             var validator = validacao.Validate(entidade);
 

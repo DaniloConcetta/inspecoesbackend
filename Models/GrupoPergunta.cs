@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Inspecoes.Models
 {
-    public class GrupoPergunta : Entity
+    public class GrupoPergunta : AbstractEntity
     {
         public GrupoPergunta() { }
 

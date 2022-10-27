@@ -3,106 +3,88 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Inspecoes.Data;
+using AutoMapper;
+
 using Inspecoes.Models;
+using Inspecoes.Interfaces;
+using Inspecoes.DTOs;
 
 namespace Inspecoes.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class PerguntasController : ControllerBase
+    [ApiVersion("1.0")]
+    [Route("api/v{ver:apiVersion}/[controller]")]  //[Route("api/[controller]")] 
+    public class PerguntasController : MainController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IPerguntaService _service;
+        private readonly IMapper _mapper;
 
-        public PerguntasController(ApplicationDbContext context)
+        public PerguntasController(IPerguntaService service,
+                                   IMapper mapper,
+                                   INotifier notificador,
+                                   IUser user) : base(notificador, user)
         {
-            _context = context;
+            _service = service;
+            _mapper = mapper;
         }
 
-        // GET: api/Pergunta
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pergunta>>> GetPerguntas()
+        [AllowAnonymous]
+        [HttpGet()]
+        public async Task<ActionResult<IPagedList<Pergunta>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
-            return await _context.Perguntas.ToListAsync();
+            var pagedList = await _service.GetPagedList(parameters);
+            return CustomResponse(_mapper.Map<IPagedList<Pergunta>>(pagedList));
         }
 
-        // GET: api/Pergunta/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Pergunta>> GetPergunta(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Pergunta>> GetByIdMe(int id)
         {
-            var pergunta = await _context.Perguntas.FindAsync(id);
-
-            if (pergunta == null)
+           var response = await _service.GetById(id);
+            if (response == null)
             {
                 return NotFound();
             }
-
-            return pergunta;
+            return response;
         }
 
-        // PUT: api/Pergunta/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPergunta(int id, Pergunta pergunta)
+
+        [HttpPost]
+        public async Task<ActionResult<Pergunta>> PostMe(Pergunta model)
         {
-            if (id != pergunta.Id)
+            await _service.Insert(model);
+            return model;
+        }
+
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Pergunta>> PutMe(int id, Pergunta model)
+        {
+            if (id != model.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pergunta).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.Update(model);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PerguntaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
+            return model; // NoContent();//melhorar pois o retorno ideal é o retorno completo do model
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteMe(int id)
+        {
+            await _service.Delete(id);
             return NoContent();
         }
 
-        // POST: api/Pergunta
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Pergunta>> PostPergunta(Pergunta pergunta)
-        {
-            _context.Perguntas.Add(pergunta);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPergunta", new { id = pergunta.Id }, pergunta);
-        }
-
-        // DELETE: api/Pergunta/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePergunta(int id)
-        {
-            var pergunta = await _context.Perguntas.FindAsync(id);
-            if (pergunta == null)
-            {
-                return NotFound();
-            }
-
-            _context.Perguntas.Remove(pergunta);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool PerguntaExists(int id)
-        {
-            return _context.Perguntas.Any(e => e.Id == id);
-        }
     }
 }

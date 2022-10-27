@@ -19,16 +19,17 @@ namespace Inspecoes.Repository
                    .Include(c => c.GrupoPerguntaPerguntas)
                    .Include(c => c.GrupoPerguntaGruposProdutos)
                    .FirstOrDefaultAsync(c => c.Id == id);
-
         }
+
+        /* exemplo
         public async Task<GrupoPergunta> ObterPerguntasGrupoPergunta(int idGrupoPergunta)
         {
-            return null; /*await Db.GruposPerguntas.AsNoTracking()
+            return await Db.GruposPerguntas.AsNoTracking()
                    .Include(c => c.Perguntas)
                    .Include(c => c.GruposProdutos)
-                   .FirstOrDefaultAsync(c => c.Id == idGrupoPergunta);*/
-
+                   .FirstOrDefaultAsync(c => c.Id == idGrupoPergunta);
         }
+        */
 
     }
 }

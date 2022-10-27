@@ -15,14 +15,10 @@ namespace Inspecoes.Controllers
     [ApiController]
     public class GruposPerguntasController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IGrupoPerguntaService _grupoPerguntaService; 
 
-
-        public GruposPerguntasController(ApplicationDbContext context,
-                                        IGrupoPerguntaService grupoPerguntaService)
+        public GruposPerguntasController(IGrupoPerguntaService grupoPerguntaService)
         {
-            _context = context;
             _grupoPerguntaService = grupoPerguntaService;
         }
 
@@ -30,7 +26,7 @@ namespace Inspecoes.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GrupoPergunta>>> GetGruposPerguntas()
         {
-            return await _context.GruposPerguntas.ToListAsync();
+            return await _grupoPerguntaService.GetAll();
         }
 
         // GET: api/GrupoPergunta/5
@@ -74,11 +70,9 @@ namespace Inspecoes.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(grupoPergunta).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _grupoPerguntaService.Update(grupoPergunta);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -100,8 +94,8 @@ namespace Inspecoes.Controllers
         [HttpPost]
         public async Task<ActionResult<GrupoPergunta>> PostGrupoPergunta(GrupoPergunta grupoPergunta)
         {
-            _context.GruposPerguntas.Add(grupoPergunta);
-            await _context.SaveChangesAsync();
+            
+            await _grupoPerguntaService.Insert(grupoPergunta);
 
             return CreatedAtAction("GetGrupoPergunta", new { id = grupoPergunta.Id }, grupoPergunta);
         }
@@ -110,21 +104,20 @@ namespace Inspecoes.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteGrupoPergunta(int id)
         {
-            var grupoPergunta = await _context.GruposPerguntas.FindAsync(id);
+            var grupoPergunta = await _grupoPerguntaService.GetById(id);
             if (grupoPergunta == null)
             {
                 return NotFound();
             }
 
-            _context.GruposPerguntas.Remove(grupoPergunta);
-            await _context.SaveChangesAsync();
+            await _grupoPerguntaService.Delete(id);
 
             return NoContent();
         }
 
         private bool GrupoPerguntaExists(int id)
         {
-            return _context.GruposPerguntas.Any(e => e.Id == id);
+            return _grupoPerguntaService.GetById(id).IsCanceled;
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Inspecoes.Migrations
 {
-    public partial class Tabelas : Migration
+    public partial class inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,8 +17,8 @@ namespace Inspecoes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     Observacao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
+                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
                 constraints: table =>
                 {
@@ -33,8 +33,8 @@ namespace Inspecoes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<string>(type: "varchar(100)", nullable: true),
                     Descricao = table.Column<string>(type: "varchar(100)", nullable: true),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
+                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
                 constraints: table =>
                 {
@@ -49,8 +49,8 @@ namespace Inspecoes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<string>(type: "varchar(100)", nullable: false),
                     Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
+                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
                 constraints: table =>
                 {
@@ -65,8 +65,8 @@ namespace Inspecoes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GrupoProdutoId = table.Column<int>(type: "int", nullable: false),
                     GrupoPerguntaId = table.Column<int>(type: "int", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
+                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
                 constraints: table =>
                 {
@@ -95,8 +95,8 @@ namespace Inspecoes.Migrations
                     AcaoNao = table.Column<string>(type: "varchar(100)", nullable: true),
                     LaudoFinal = table.Column<string>(type: "varchar(100)", nullable: true),
                     TipoPerguntaId = table.Column<int>(type: "int", nullable: true),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
+                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
                 constraints: table =>
                 {
@@ -116,8 +116,8 @@ namespace Inspecoes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PerguntaId = table.Column<int>(type: "int", nullable: false),
                     GrupoPerguntaId = table.Column<int>(type: "int", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
+                    DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
                 constraints: table =>
                 {

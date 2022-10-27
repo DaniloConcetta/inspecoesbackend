@@ -6,6 +6,8 @@ namespace Inspecoes.Interfaces
 {
     public interface IPerguntaRepository : IAbstractRepository<Pergunta>
     {
+        /* exemplo
          Task<Pergunta> ObterPerguntasGrupoPergunta(int id);
+        */
     }
 }
