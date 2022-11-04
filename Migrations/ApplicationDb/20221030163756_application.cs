@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Inspecoes.Migrations
+namespace Inspecoes.Migrations.ApplicationDb
 {
-    public partial class inicial : Migration
+    public partial class application : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,8 @@ namespace Inspecoes.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
-                    Observacao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
+                    Observacao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
                     DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
@@ -31,8 +32,8 @@ namespace Inspecoes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Descricao = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Codigo = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
                     DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
@@ -47,8 +48,8 @@ namespace Inspecoes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Codigo = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
                     DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")
                 },
@@ -89,11 +90,11 @@ namespace Inspecoes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Descricao = table.Column<string>(type: "varchar(100)", nullable: true),
-                    AcaoSim = table.Column<string>(type: "varchar(100)", nullable: true),
-                    AcaoNao = table.Column<string>(type: "varchar(100)", nullable: true),
-                    LaudoFinal = table.Column<string>(type: "varchar(100)", nullable: true),
+                    Codigo = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
+                    AcaoSim = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
+                    AcaoNao = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
+                    LaudoFinal = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true),
                     TipoPerguntaId = table.Column<int>(type: "int", nullable: true),
                     DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data Cadastro"),
                     DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "Data atualização")

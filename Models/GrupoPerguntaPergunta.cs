@@ -10,6 +10,7 @@ namespace Inspecoes.Models
         
         public Pergunta? Pergunta { get; set; }
         public int PerguntaId { get; set; }
+       
 
         public GrupoPergunta? GrupoPergunta { get; set; }
         public int GrupoPerguntaId { get; set; }

@@ -35,7 +35,8 @@ namespace Inspecoes.Configuration
             // services.AddScoped<IUserProfileService, UserProfileService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<AuthService>();
+            services.AddScoped<IUser, AspNetUser>(); 
 
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 

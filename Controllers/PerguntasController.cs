@@ -14,7 +14,7 @@ using Inspecoes.DTOs;
 
 namespace Inspecoes.Controllers
 {
-    [ApiController]
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{ver:apiVersion}/[controller]")]  //[Route("api/[controller]")] 
     public class PerguntasController : MainController
@@ -31,8 +31,8 @@ namespace Inspecoes.Controllers
             _mapper = mapper;
         }
 
-        [AllowAnonymous]
-        [HttpGet()]
+       
+        [HttpGet()] // [AllowAnonymous]
         public async Task<ActionResult<IPagedList<Pergunta>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
             var pagedList = await _service.GetPagedList(parameters);

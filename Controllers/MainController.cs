@@ -18,7 +18,7 @@ namespace Inspecoes.Controllers
         protected string UserId { get; set; }
         protected bool UserAuthenticated { get; set; }
 
-        protected MainController(INotifier notifier, 
+        protected MainController(INotifier notifier,
                                  IUser appUser)
         {
             _notifier = notifier;

@@ -7,7 +7,7 @@ namespace Inspecoes.Models
     {
         public Pergunta() { }
 
-        //[Required(ErrorMessage = "O campo {0} é obrigatório")]
+        [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [StringLength(20, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
         public string? Codigo { get; set; }
         
@@ -26,7 +26,7 @@ namespace Inspecoes.Models
         public string? LaudoFinal { get; set; }
 
         public int? TipoPerguntaId { get; set; }
-
+        
         //Relacionamentos
         [JsonIgnore]
         public TipoPergunta? TipoPergunta { get; set; }

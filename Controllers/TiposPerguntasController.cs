@@ -12,10 +12,11 @@ using Inspecoes.Data;
 using Inspecoes.Models;
 using Inspecoes.Interfaces;
 using Inspecoes.DTOs;
+using Inspecoes.Extensions;
 
 namespace Inspecoes.Controllers
 {
-    [ApiController]
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{ver:apiVersion}/[controller]")]
     public class TiposPerguntasController : MainController
@@ -32,14 +33,14 @@ namespace Inspecoes.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("get-all")]
+
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<TipoPergunta>>> GetAllMe()
         {
             return await _service.GetAll();
         }
 
-        [AllowAnonymous]
-        [HttpGet()]
+        [HttpGet()] // [AllowAnonymous]
         public async Task<ActionResult<IPagedList<TipoPergunta>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
             var pagedList = await _service.GetPagedList(parameters);
@@ -47,6 +48,7 @@ namespace Inspecoes.Controllers
         }
 
 
+        //[ClaimsAuthorize("TiposPerguntas", "Get")]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<TipoPergunta>> GetByIdMe(int id)
         {
@@ -68,6 +70,7 @@ namespace Inspecoes.Controllers
             return model;
         }
 
+        [ClaimsAuthorize("TiposPerguntas", "Put")]
         [HttpPut("{id:int}")] // PUT: api/Criterios/5
         public async Task<IActionResult> PutMe(int id, TipoPergunta model)
         {
@@ -89,6 +92,7 @@ namespace Inspecoes.Controllers
             return NoContent();
         }
 
+        [ClaimsAuthorize("TiposPerguntas", "Delete")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteMe(int id)
         {

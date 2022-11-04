@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Inspecoes.DTOs;
 using Inspecoes.Interfaces;
 using Inspecoes.Models;
 
@@ -67,14 +67,12 @@ namespace Inspecoes.Services
             await _repository.Delete(id);
         }
 
-        /*
-        public Task<IPagedList<Course>> GetPagedList(FilteredPagedListParameters parameters)
+        public Task<IPagedList<GrupoPergunta>> GetPagedList(FilteredPagedListParameters parameters)
         {
             return _repository.GetPagedList(f =>
-            (parameters.Search == null || f.CourseName.Contains(parameters.Search) || f.CourseName.Contains(parameters.Search)
+            (parameters.Search == null || f.Codigo.Contains(parameters.Search) || f.Descricao.Contains(parameters.Search)
             ), parameters);
         }
-        */
 
         public async Task<GrupoPergunta> GetDetailsById(int id)
         {
