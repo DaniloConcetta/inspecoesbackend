@@ -29,7 +29,7 @@ namespace Inspecoes.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("new")]
+        [HttpPost("create")]
         public async Task<ActionResult> Registrar(CreateUserViewModel registerUser)
         {
            if (!ModelState.IsValid) return CustomResponse(ModelState);

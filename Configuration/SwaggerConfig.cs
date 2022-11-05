@@ -46,6 +46,7 @@ namespace Inspecoes.Configuration
                         new string[] {}
                     }
                 });
+
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
@@ -91,7 +92,11 @@ namespace Inspecoes.Configuration
                 Title = "Inspeções",
                 Version = description.ApiVersion.ToString(),
                 Description = "Aplicação Inspeções - CEPEDI",
-                //Contact = new OpenApiContact() { Name = "CEPEDI", Email = "equipedotnet@cepedi.org.br" },
+                Contact = new OpenApiContact
+                {
+                    Name = "Asonilo",
+                    Url = new Uri("https://asonilo.web.app/")
+                },
                 License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             };
 

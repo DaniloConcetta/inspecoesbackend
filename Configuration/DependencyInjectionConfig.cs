@@ -24,9 +24,11 @@ namespace Inspecoes.Configuration
             services.AddScoped<IPerguntaRepository, PerguntaRepository>();
             services.AddScoped<IPerguntaService, PerguntaService>();
             services.AddScoped<IGrupoPerguntaRepository, GrupoPerguntaRepository>();
+            services.AddScoped<IGrupoPerguntaPerguntaRepository, GrupoPerguntaPerguntaRepository>();
+            services.AddScoped<IGrupoPerguntaGrupoProdutoRepository, GrupoPerguntaGrupoProdutoRepository>();
             services.AddScoped<IGrupoPerguntaService, GrupoPerguntaService>();
             services.AddScoped<IGrupoProdutoRepository, GrupoProdutoRepository>();
-
+            services.AddScoped<IGrupoProdutoService, GrupoProdutoService>();
             // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
