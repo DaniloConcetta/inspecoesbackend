@@ -18,6 +18,10 @@ namespace Inspecoes.Configuration
         public static IServiceCollection AddIdentityConfig(this IServiceCollection services,
             IConfiguration configuration)
         {
+            var appSettingsSection = configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("AppIdentityDbContext")));// AppIdentityDbContext
 
@@ -27,10 +31,7 @@ namespace Inspecoes.Configuration
                 .AddDefaultTokenProviders();
 
         //  services.AddDefaultIdentity<CustomUser>().AddRoles<CustomRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddErrorDescriber<IdentityMensagensPortugues>().AddDefaultTokenProviders();
-            
-            // JWT
-            var appSettingsSection = configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
+          
 
             services.Configure<IdentityOptions>(options =>
             {

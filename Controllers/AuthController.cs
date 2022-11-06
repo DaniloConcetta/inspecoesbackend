@@ -76,5 +76,24 @@ namespace Inspecoes.Controllers
             return CustomResponse(loginUser);
         }
 
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult> RefreshToken([FromBody] string refreshToken)
+        {
+            if (string.IsNullOrEmpty(refreshToken))
+            {
+                NotifyError("Refresh Token Inválido");
+                return CustomResponse();
+            }
+
+            var token = await _authService.ObterRefreshToken(Guid.Parse(refreshToken));
+            if (token is null)
+            {
+                NotifyError("Refresh Token expirado");
+                return CustomResponse();
+            }
+
+            return CustomResponse(await _authService.GerarJwt(token.Username));
+
+        }
     }
 }

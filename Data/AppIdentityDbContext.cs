@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Inspecoes.Models;
 
 namespace Inspecoes.Data
 {
@@ -13,6 +14,8 @@ namespace Inspecoes.Data
         //CustomUserLogin, CustomRoleClaim, CustomUserToken>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) { }
+
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         /*
                 protected override void OnModelCreating(ModelBuilder builder)
