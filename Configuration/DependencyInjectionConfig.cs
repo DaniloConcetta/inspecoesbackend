@@ -9,7 +9,6 @@ using Inspecoes.Extensions;
 //using Inspecoes.Notifications;
 //using Inspecoes.Services;
 
-
 namespace Inspecoes.Configuration
 {
     public static class DependencyInjectionConfig
@@ -24,13 +23,18 @@ namespace Inspecoes.Configuration
             services.AddScoped<IPerguntaRepository, PerguntaRepository>();
             services.AddScoped<IPerguntaService, PerguntaService>();
             services.AddScoped<IGrupoPerguntaRepository, GrupoPerguntaRepository>();
+            services.AddScoped<IGrupoPerguntaPerguntaRepository, GrupoPerguntaPerguntaRepository>();
+            services.AddScoped<IGrupoPerguntaGrupoProdutoRepository, GrupoPerguntaGrupoProdutoRepository>();
             services.AddScoped<IGrupoPerguntaService, GrupoPerguntaService>();
             services.AddScoped<IGrupoProdutoRepository, GrupoProdutoRepository>();
+
             services.AddScoped<IOpRepository, OpRepository>();
             services.AddScoped<IStatusInspecaoRepository, StatusInspecaoRepository>();
             services.AddScoped<IStatusInspecaoService, StatusInspecaoService>();
             services.AddScoped<IInspecaoRepository, InspecaoRepository>();
             services.AddScoped<IInspecaoService, InspecaoService>();
+
+            services.AddScoped<IGrupoProdutoService, GrupoProdutoService>();
 
             // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddScoped<IUserProfileRepository, UserProfileRepository>();
@@ -40,7 +44,8 @@ namespace Inspecoes.Configuration
             // services.AddScoped<IUserProfileService, UserProfileService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<AuthService>();
+            services.AddScoped<IUser, AspNetUser>(); 
 
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 

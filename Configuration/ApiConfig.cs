@@ -18,7 +18,12 @@ namespace Inspecoes.Configuration
     {
         public static IServiceCollection AddApiConfig(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Program));
+           
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
 
             services.AddControllers(options =>
             {
@@ -44,7 +49,6 @@ namespace Inspecoes.Configuration
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
-
             });
 
             services.AddCors(options =>
@@ -91,9 +95,32 @@ namespace Inspecoes.Configuration
 
             //app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
+            app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseStaticFiles();
+            // app.UseStaticFiles();
+
+            /*
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHealthChecks("/api/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecksUI(options =>
+                {
+                    options.UIPath = "/api/hc-ui";
+                    options.ResourcesPath = "/api/hc-ui-resources";
+
+                    options.UseRelativeApiPath = false;
+                    options.UseRelativeResourcesPath = false;
+                    options.UseRelativeWebhookPath = false;
+                });
+
+            });
+            */
 
             return app;
         }

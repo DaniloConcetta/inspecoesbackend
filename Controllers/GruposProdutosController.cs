@@ -3,106 +3,88 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Inspecoes.Data;
+using AutoMapper;
+
 using Inspecoes.Models;
+using Inspecoes.Interfaces;
+using Inspecoes.DTOs;
 
 namespace Inspecoes.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class GruposProdutosController : ControllerBase
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Route("api/v{ver:apiVersion}/[controller]")]  
+    public class GruposProdutosController : MainController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IGrupoProdutoService _service;
+        private readonly IMapper _mapper;
 
-        public GruposProdutosController(ApplicationDbContext context)
+        public GruposProdutosController(IGrupoProdutoService service,
+                                   IMapper mapper,
+                                   INotifier notificador,
+                                   IUser user) : base(notificador, user)
         {
-            _context = context;
+            _service = service;
+            _mapper = mapper;
         }
 
-        // GET: api/GrupoProduto
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GrupoProduto>>> GetGruposProdutos()
+
+        [HttpGet()] 
+        public async Task<ActionResult<IPagedList<GrupoProduto>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
-            return await _context.GruposProdutos.ToListAsync();
+            var pagedList = await _service.GetPagedList(parameters);
+            return CustomResponse(_mapper.Map<IPagedList<GrupoProduto>>(pagedList));
         }
 
-        // GET: api/GrupoProduto/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GrupoProduto>> GetGrupoProduto(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<GrupoProduto>> GetByIdMe(int id)
         {
-            var grupoProduto = await _context.GruposProdutos.FindAsync(id);
-
-            if (grupoProduto == null)
+            var response = await _service.GetById(id);
+            if (response == null)
             {
                 return NotFound();
             }
-
-            return grupoProduto;
+            return response;
         }
 
-        // PUT: api/GrupoProduto/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGrupoProduto(int id, GrupoProduto grupoProduto)
+
+        [HttpPost]
+        public async Task<ActionResult<GrupoProduto>> PostMe(GrupoProduto model)
         {
-            if (id != grupoProduto.Id)
+            await _service.Insert(model);
+            return model;
+        }
+
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<GrupoProduto>> PutMe(int id, GrupoProduto model)
+        {
+            if (id != model.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(grupoProduto).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.Update(model);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GrupoProdutoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
+            return model; 
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteMe(int id)
+        {
+            await _service.Delete(id);
             return NoContent();
         }
 
-        // POST: api/GrupoProduto
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<GrupoProduto>> PostGrupoProduto(GrupoProduto grupoProduto)
-        {
-            _context.GruposProdutos.Add(grupoProduto);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetGrupoProduto", new { id = grupoProduto.Id }, grupoProduto);
-        }
-
-        // DELETE: api/GrupoProduto/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGrupoProduto(int id)
-        {
-            var grupoProduto = await _context.GruposProdutos.FindAsync(id);
-            if (grupoProduto == null)
-            {
-                return NotFound();
-            }
-
-            _context.GruposProdutos.Remove(grupoProduto);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool GrupoProdutoExists(int id)
-        {
-            return _context.GruposProdutos.Any(e => e.Id == id);
-        }
     }
 }

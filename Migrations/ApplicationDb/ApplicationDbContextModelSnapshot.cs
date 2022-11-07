@@ -4,7 +4,6 @@ using Inspecoes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,15 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inspecoes.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:Migrations/20221106175658_refact1.Designer.cs
-    [Migration("20221106175658_refact1")]
-    partial class refact1
-========
-    [Migration("20221030163756_application")]
-    partial class application
->>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/20221030163756_application.Designer.cs
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +84,7 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     b.HasIndex("GrupoProdutoId");
 
-                    b.ToTable("GrupoPerguntaGrupoProduto");
+                    b.ToTable("GrupoPerguntaGrupoProdutos");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoPerguntaPergunta", b =>
@@ -122,7 +115,7 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     b.HasIndex("PerguntaId");
 
-                    b.ToTable("GrupoPerguntaPergunta");
+                    b.ToTable("GrupoPerguntaPerguntas");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoProduto", b =>
@@ -155,6 +148,86 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.ToTable("GruposProdutos");
                 });
 
+            modelBuilder.Entity("Inspecoes.Models.Inspecao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
+
+                    b.Property<int?>("GrupoPerguntaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OpId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusInspecaoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GrupoPerguntaId");
+
+                    b.HasIndex("OpId");
+
+                    b.HasIndex("StatusInspecaoId");
+
+                    b.ToTable("Inspecao");
+                });
+
+            modelBuilder.Entity("Inspecoes.Models.Op", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
+
+                    b.Property<string>("Opnumero")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("ProdutoCodigo")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("ProdutoDescricao")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("ProdutoGrupo")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int?>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Op");
+                });
+
             modelBuilder.Entity("Inspecoes.Models.Pergunta", b =>
                 {
                     b.Property<int>("Id")
@@ -170,14 +243,14 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.Property<string>("AcaoSim")
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
-<<<<<<<< HEAD:Migrations/20221106175658_refact1.Designer.cs
-========
+<<<<<<< HEAD:Migrations/ApplicationDbContextModelSnapshot.cs
+=======
 
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
->>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/20221030163756_application.Designer.cs
+>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -205,7 +278,7 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.ToTable("Perguntas");
                 });
 
-            modelBuilder.Entity("Inspecoes.Models.TipoPergunta", b =>
+            modelBuilder.Entity("Inspecoes.Models.StatusInspecao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,14 +286,14 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-<<<<<<<< HEAD:Migrations/20221106175658_refact1.Designer.cs
-========
+<<<<<<< HEAD:Migrations/ApplicationDbContextModelSnapshot.cs
+=======
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
->>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/20221030163756_application.Designer.cs
+>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/ApplicationDbContextModelSnapshot.cs
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
                         .HasComment("Data atualização");
@@ -233,6 +306,35 @@ namespace Inspecoes.Migrations.ApplicationDb
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
+<<<<<<< HEAD:Migrations/ApplicationDbContextModelSnapshot.cs
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StatusInspecao");
+                });
+
+            modelBuilder.Entity("Inspecoes.Models.TipoPergunta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+=======
+>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/ApplicationDbContextModelSnapshot.cs
 
                     b.HasKey("Id");
 
@@ -271,6 +373,27 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.Navigation("GrupoPergunta");
 
                     b.Navigation("Pergunta");
+                });
+
+            modelBuilder.Entity("Inspecoes.Models.Inspecao", b =>
+                {
+                    b.HasOne("Inspecoes.Models.GrupoPergunta", "grupoPergunta")
+                        .WithMany()
+                        .HasForeignKey("GrupoPerguntaId");
+
+                    b.HasOne("Inspecoes.Models.Op", "op")
+                        .WithMany()
+                        .HasForeignKey("OpId");
+
+                    b.HasOne("Inspecoes.Models.StatusInspecao", "statusInspecao")
+                        .WithMany()
+                        .HasForeignKey("StatusInspecaoId");
+
+                    b.Navigation("grupoPergunta");
+
+                    b.Navigation("op");
+
+                    b.Navigation("statusInspecao");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.Pergunta", b =>

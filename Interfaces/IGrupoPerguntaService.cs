@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Inspecoes.DTOs;
 using Inspecoes.Models;
 
 namespace Inspecoes.Interfaces
@@ -14,7 +14,8 @@ namespace Inspecoes.Interfaces
         Task Update(GrupoPergunta model);
         Task Delete(int id);
 
+        Task<IPagedList<GrupoPergunta>> GetPagedList(FilteredPagedListParameters parameters);
         Task<GrupoPergunta> GetDetailsById(int id);
-        //   Task<IPagedList<GrupoPergunta>> GetPagedList(FilteredPagedListParameters parameters);
+
     }
 }

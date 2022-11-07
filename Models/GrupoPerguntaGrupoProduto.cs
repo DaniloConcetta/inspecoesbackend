@@ -8,9 +8,11 @@ namespace Inspecoes.Models
     {
         public GrupoPerguntaGrupoProduto() { }
 
+        [JsonIgnore]
         public GrupoProduto? GrupoProduto { get; set; }
         public int GrupoProdutoId { get; set; }
 
+        [JsonIgnore]
         public GrupoPergunta? GrupoPergunta { get; set; }
         public int GrupoPerguntaId { get; set; }
 

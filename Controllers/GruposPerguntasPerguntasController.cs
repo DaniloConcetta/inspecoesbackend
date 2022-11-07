@@ -3,106 +3,86 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Inspecoes.Data;
+using AutoMapper;
+
 using Inspecoes.Models;
+using Inspecoes.Interfaces;
+using Inspecoes.DTOs;
 
 namespace Inspecoes.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class GruposPerguntasPerguntasController : ControllerBase
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Route("api/v{ver:apiVersion}/[controller]")]  
+    public class GruposPerguntasPerguntasController : MainController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IGrupoPerguntaPerguntaRepository _repository;
+        private readonly IMapper _mapper;
 
-        public GruposPerguntasPerguntasController(ApplicationDbContext context)
+        public GruposPerguntasPerguntasController(IGrupoPerguntaPerguntaRepository repository,
+                                   IMapper mapper,
+                                   INotifier notificador,
+                                   IUser user) : base(notificador, user)
         {
-            _context = context;
+            _repository = repository;
+            _mapper = mapper;
         }
 
-        // GET: api/GruposPerguntasPerguntas
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<GrupoPerguntaPergunta>>> GetGrupoPerguntaPergunta()
+        [HttpGet("all")]
+        public async Task<ActionResult<IEnumerable<GrupoPerguntaPergunta>>> GetAllMe()
         {
-            return await _context.GrupoPerguntaPergunta.ToListAsync();
+            return await _repository.GetAll();
         }
 
-        // GET: api/GruposPerguntasPerguntas/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GrupoPerguntaPergunta>> GetGrupoPerguntaPergunta(int id)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<GrupoPerguntaPergunta>> GetByIdMe(int id)
         {
-            var grupoPerguntaPergunta = await _context.GrupoPerguntaPergunta.FindAsync(id);
-
-            if (grupoPerguntaPergunta == null)
+            var response = await _repository.GetById(id);
+            if (response == null)
             {
                 return NotFound();
             }
-
-            return grupoPerguntaPergunta;
+            return response;
         }
 
-        // PUT: api/GruposPerguntasPerguntas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutGrupoPerguntaPergunta(int id, GrupoPerguntaPergunta grupoPerguntaPergunta)
+
+        [HttpPost]
+        public async Task<ActionResult<GrupoPerguntaPergunta>> PostMe(GrupoPerguntaPergunta model)
         {
-            if (id != grupoPerguntaPergunta.Id)
+            await _repository.Insert(model);
+            return model;
+        }
+
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<GrupoPerguntaPergunta>> PutMe(int id, GrupoPerguntaPergunta model)
+        {
+            if (id != model.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(grupoPerguntaPergunta).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.Update(model);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GrupoPerguntaPerguntaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
+            return model; 
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteMe(int id)
+        {
+            await _repository.Delete(id);
             return NoContent();
         }
 
-        // POST: api/GruposPerguntasPerguntas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<GrupoPerguntaPergunta>> PostGrupoPerguntaPergunta(GrupoPerguntaPergunta grupoPerguntaPergunta)
-        {
-            _context.GrupoPerguntaPergunta.Add(grupoPerguntaPergunta);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetGrupoPerguntaPergunta", new { id = grupoPerguntaPergunta.Id }, grupoPerguntaPergunta);
-        }
-
-        // DELETE: api/GruposPerguntasPerguntas/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGrupoPerguntaPergunta(int id)
-        {
-            var grupoPerguntaPergunta = await _context.GrupoPerguntaPergunta.FindAsync(id);
-            if (grupoPerguntaPergunta == null)
-            {
-                return NotFound();
-            }
-
-            _context.GrupoPerguntaPergunta.Remove(grupoPerguntaPergunta);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool GrupoPerguntaPerguntaExists(int id)
-        {
-            return _context.GrupoPerguntaPergunta.Any(e => e.Id == id);
-        }
     }
 }

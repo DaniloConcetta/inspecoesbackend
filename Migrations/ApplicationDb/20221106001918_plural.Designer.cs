@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inspecoes.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:Migrations/20221106175658_refact1.Designer.cs
-    [Migration("20221106175658_refact1")]
-    partial class refact1
-========
-    [Migration("20221030163756_application")]
-    partial class application
->>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/20221030163756_application.Designer.cs
+    [Migration("20221106001918_plural")]
+    partial class plural
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,7 +86,7 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     b.HasIndex("GrupoProdutoId");
 
-                    b.ToTable("GrupoPerguntaGrupoProduto");
+                    b.ToTable("GrupoPerguntaGrupoProdutos");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoPerguntaPergunta", b =>
@@ -122,7 +117,7 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     b.HasIndex("PerguntaId");
 
-                    b.ToTable("GrupoPerguntaPergunta");
+                    b.ToTable("GrupoPerguntaPerguntas");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoProduto", b =>
@@ -170,14 +165,11 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.Property<string>("AcaoSim")
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
-<<<<<<<< HEAD:Migrations/20221106175658_refact1.Designer.cs
-========
 
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
->>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/20221030163756_application.Designer.cs
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -213,14 +205,11 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-<<<<<<<< HEAD:Migrations/20221106175658_refact1.Designer.cs
-========
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
 
->>>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/20221030163756_application.Designer.cs
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
                         .HasComment("Data atualização");

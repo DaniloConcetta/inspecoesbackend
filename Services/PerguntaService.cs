@@ -11,7 +11,6 @@ using Inspecoes.Models;
 namespace Inspecoes.Services
 {
     public class PerguntaService : AbstractBaseService<Pergunta>, IPerguntaService
-
     {
         private readonly IPerguntaRepository _repository;
         
@@ -65,7 +64,7 @@ namespace Inspecoes.Services
         public Task<IPagedList<Pergunta>> GetPagedList(FilteredPagedListParameters parameters)
         {
             return _repository.GetPagedList(f =>
-            (  parameters.Search == null || f.Descricao.Contains(parameters.Search) || f.Descricao.Contains(parameters.Search)
+            (  parameters.Search == null || f.Codigo.Contains(parameters.Search) || f.Descricao.Contains(parameters.Search)
             ), parameters);
         }
 

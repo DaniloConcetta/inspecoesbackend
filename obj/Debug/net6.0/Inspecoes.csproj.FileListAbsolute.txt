@@ -338,8 +338,10 @@ D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\IdentityModel.OidcClient.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\KubernetesClient.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\MessagePack.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\MessagePack.Annotations.dll
+D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Versioning.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
@@ -400,6 +402,9 @@ D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.VisualStudio.Web.Co
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\NetDevPack.Security.JwtSigningCredentials.dll
+D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\NetDevPack.Security.JwtSigningCredentials.AspNetCore.dll
+D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\NetDevPack.Security.JwtSigningCredentials.Store.EntityFrameworkCore.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\NuGet.Common.dll
 D:\JavaDeveloper\inspecoesbackend\bin\Debug\net6.0\NuGet.Configuration.dll

@@ -2,18 +2,17 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 using Inspecoes.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Inspecoes.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
-        public DbSet<GrupoPerguntaPergunta> GrupoPerguntaPergunta { get; set; }
-        public DbSet<GrupoPerguntaGrupoProduto> GrupoPerguntaGrupoProduto { get; set; }
+        public DbSet<GrupoPerguntaPergunta> GrupoPerguntaPerguntas { get; set; }
+        public DbSet<GrupoPerguntaGrupoProduto> GrupoPerguntaGrupoProdutos { get; set; }
         public DbSet<GrupoPergunta> GruposPerguntas { get; set; }
         public DbSet<GrupoProduto> GruposProdutos { get; set; }
         public DbSet<Pergunta> Perguntas { get; set; }
