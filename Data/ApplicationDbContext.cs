@@ -10,7 +10,6 @@ namespace Inspecoes.Data
 {
     public class ApplicationDbContext : DbContext
     {
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<GrupoPerguntaPergunta> GrupoPerguntaPergunta { get; set; }
@@ -19,6 +18,9 @@ namespace Inspecoes.Data
         public DbSet<GrupoProduto> GruposProdutos { get; set; }
         public DbSet<Pergunta> Perguntas { get; set; }
         public DbSet<TipoPergunta> TiposPerguntas { get; set; }
+        public DbSet<Op> Op { get; set; }
+        public DbSet<StatusInspecao> StatusInspecao { get; set; }
+        public DbSet<Inspecao> Inspecao { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,5 +64,6 @@ namespace Inspecoes.Data
 
             return base.SaveChangesAsync(cancellationToken);
         }
+
     }
 }

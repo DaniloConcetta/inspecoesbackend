@@ -26,6 +26,11 @@ namespace Inspecoes.Configuration
             services.AddScoped<IGrupoPerguntaRepository, GrupoPerguntaRepository>();
             services.AddScoped<IGrupoPerguntaService, GrupoPerguntaService>();
             services.AddScoped<IGrupoProdutoRepository, GrupoProdutoRepository>();
+            services.AddScoped<IOpRepository, OpRepository>();
+            services.AddScoped<IStatusInspecaoRepository, StatusInspecaoRepository>();
+            services.AddScoped<IStatusInspecaoService, StatusInspecaoService>();
+            services.AddScoped<IInspecaoRepository, InspecaoRepository>();
+            services.AddScoped<IInspecaoService, InspecaoService>();
 
             // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddScoped<IUserProfileRepository, UserProfileRepository>();
@@ -38,6 +43,9 @@ namespace Inspecoes.Configuration
             services.AddScoped<IUser, AspNetUser>();
 
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
+            services.AddHttpClient<IGruposProdutoPService, GruposProdutoPService>();
+            services.AddHttpClient<IOpPService, OpPService>();
 
             return services;
         }

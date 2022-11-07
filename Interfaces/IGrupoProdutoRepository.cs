@@ -9,5 +9,7 @@ namespace Inspecoes.Interfaces
         /* exemplo
          Task<GrupoProduto> ObterGruposProdutosGrupoPergunta(int id);
         */
+        Task<GrupoProduto> GetByCodigo(string codigo);
     }
+    
 }

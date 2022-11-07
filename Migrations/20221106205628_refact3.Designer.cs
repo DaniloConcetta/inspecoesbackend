@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inspecoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221026160855_inicial")]
-    partial class inicial
+    [Migration("20221106205628_refact3")]
+    partial class refact3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -144,6 +144,47 @@ namespace Inspecoes.Migrations
                     b.ToTable("GruposProdutos");
                 });
 
+            modelBuilder.Entity("Inspecoes.Models.Op", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
+
+                    b.Property<string>("Opnumero")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("ProdutoCodigo")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("ProdutoDescricao")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("ProdutoGrupo")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int?>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Op");
+                });
+
             modelBuilder.Entity("Inspecoes.Models.Pergunta", b =>
                 {
                     b.Property<int>("Id")
@@ -153,13 +194,12 @@ namespace Inspecoes.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AcaoNao")
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("AcaoSim")
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("Codigo")
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -170,10 +210,12 @@ namespace Inspecoes.Migrations
                         .HasComment("Data Cadastro");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("LaudoFinal")
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.Property<int?>("TipoPerguntaId")
                         .HasColumnType("int");
@@ -193,10 +235,6 @@ namespace Inspecoes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
                         .HasComment("Data atualização");
@@ -207,7 +245,8 @@ namespace Inspecoes.Migrations
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 

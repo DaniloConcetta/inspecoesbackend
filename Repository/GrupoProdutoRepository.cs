@@ -21,6 +21,12 @@ namespace Inspecoes.Repository
         }
         */
 
+        public async Task<GrupoProduto> GetByCodigo(string codigo)
+        {
+
+            return await DbSet.FirstOrDefaultAsync(p => p.Codigo == codigo);
+
+        }
 
     }
 }

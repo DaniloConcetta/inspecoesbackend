@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\JavaDeveloper\\inspecoesbackend\\Inspecoes.csproj": {}
+    "C:\\D\\NETCore\\Cepedi\\Positivo\\sfc\\inspecoesbackend\\Inspecoes.csproj": {}
   },
   "projects": {
-    "D:\\JavaDeveloper\\inspecoesbackend\\Inspecoes.csproj": {
+    "C:\\D\\NETCore\\Cepedi\\Positivo\\sfc\\inspecoesbackend\\Inspecoes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\JavaDeveloper\\inspecoesbackend\\Inspecoes.csproj",
+        "projectUniqueName": "C:\\D\\NETCore\\Cepedi\\Positivo\\sfc\\inspecoesbackend\\Inspecoes.csproj",
         "projectName": "Inspecoes",
-        "projectPath": "D:\\JavaDeveloper\\inspecoesbackend\\Inspecoes.csproj",
-        "packagesPath": "C:\\Users\\danil\\.nuget\\packages\\",
-        "outputPath": "D:\\JavaDeveloper\\inspecoesbackend\\obj\\",
+        "projectPath": "C:\\D\\NETCore\\Cepedi\\Positivo\\sfc\\inspecoesbackend\\Inspecoes.csproj",
+        "packagesPath": "C:\\Users\\asora\\.nuget\\packages\\",
+        "outputPath": "C:\\D\\NETCore\\Cepedi\\Positivo\\sfc\\inspecoesbackend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\danil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\asora\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
