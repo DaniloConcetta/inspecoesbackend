@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Inspecoes.Migrations
+namespace Inspecoes.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221106220935_refact")]
-    partial class refact
+    [Migration("20221107130407_Refact1")]
+    partial class Refact1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,8 +45,11 @@ namespace Inspecoes.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Data Cadastro");
 
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
                     b.Property<string>("Observacao")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
@@ -83,7 +86,7 @@ namespace Inspecoes.Migrations
 
                     b.HasIndex("GrupoProdutoId");
 
-                    b.ToTable("GrupoPerguntaGrupoProduto");
+                    b.ToTable("GrupoPerguntaGrupoProdutos");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoPerguntaPergunta", b =>
@@ -114,7 +117,7 @@ namespace Inspecoes.Migrations
 
                     b.HasIndex("PerguntaId");
 
-                    b.ToTable("GrupoPerguntaPergunta");
+                    b.ToTable("GrupoPerguntaPerguntas");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoProduto", b =>
@@ -126,7 +129,9 @@ namespace Inspecoes.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Codigo")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -137,7 +142,8 @@ namespace Inspecoes.Migrations
                         .HasComment("Data Cadastro");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 

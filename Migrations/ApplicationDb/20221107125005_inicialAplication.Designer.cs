@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Inspecoes.Migrations
+namespace Inspecoes.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221106205628_refact3")]
-    partial class refact3
+    [Migration("20221107125005_inicialAplication")]
+    partial class inicialAplication
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,8 +45,11 @@ namespace Inspecoes.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Data Cadastro");
 
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
                     b.Property<string>("Observacao")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
@@ -83,7 +86,7 @@ namespace Inspecoes.Migrations
 
                     b.HasIndex("GrupoProdutoId");
 
-                    b.ToTable("GrupoPerguntaGrupoProduto");
+                    b.ToTable("GrupoPerguntaGrupoProdutos");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoPerguntaPergunta", b =>
@@ -114,7 +117,7 @@ namespace Inspecoes.Migrations
 
                     b.HasIndex("PerguntaId");
 
-                    b.ToTable("GrupoPerguntaPergunta");
+                    b.ToTable("GrupoPerguntaPerguntas");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.GrupoProduto", b =>
@@ -126,7 +129,9 @@ namespace Inspecoes.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Codigo")
-                        .HasColumnType("varchar(100)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -137,11 +142,51 @@ namespace Inspecoes.Migrations
                         .HasComment("Data Cadastro");
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("varchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 
                     b.ToTable("GruposProdutos");
+                });
+
+            modelBuilder.Entity("Inspecoes.Models.Inspecao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
+
+                    b.Property<int?>("GrupoPerguntaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OpId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StatusInspecaoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GrupoPerguntaId");
+
+                    b.HasIndex("OpId");
+
+                    b.HasIndex("StatusInspecaoId");
+
+                    b.ToTable("Inspecao");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.Op", b =>
@@ -201,6 +246,11 @@ namespace Inspecoes.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
+                    b.Property<string>("Codigo")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
                         .HasComment("Data atualização");
@@ -225,6 +275,32 @@ namespace Inspecoes.Migrations
                     b.HasIndex("TipoPerguntaId");
 
                     b.ToTable("Perguntas");
+                });
+
+            modelBuilder.Entity("Inspecoes.Models.StatusInspecao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime?>("DataAtualizacao")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data atualização");
+
+                    b.Property<DateTime?>("DataCadastro")
+                        .HasColumnType("datetime2")
+                        .HasComment("Data Cadastro");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StatusInspecao");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.TipoPergunta", b =>
@@ -285,6 +361,27 @@ namespace Inspecoes.Migrations
                     b.Navigation("GrupoPergunta");
 
                     b.Navigation("Pergunta");
+                });
+
+            modelBuilder.Entity("Inspecoes.Models.Inspecao", b =>
+                {
+                    b.HasOne("Inspecoes.Models.GrupoPergunta", "grupoPergunta")
+                        .WithMany()
+                        .HasForeignKey("GrupoPerguntaId");
+
+                    b.HasOne("Inspecoes.Models.Op", "op")
+                        .WithMany()
+                        .HasForeignKey("OpId");
+
+                    b.HasOne("Inspecoes.Models.StatusInspecao", "statusInspecao")
+                        .WithMany()
+                        .HasForeignKey("StatusInspecaoId");
+
+                    b.Navigation("grupoPergunta");
+
+                    b.Navigation("op");
+
+                    b.Navigation("statusInspecao");
                 });
 
             modelBuilder.Entity("Inspecoes.Models.Pergunta", b =>

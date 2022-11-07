@@ -243,14 +243,6 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.Property<string>("AcaoSim")
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
-<<<<<<< HEAD:Migrations/ApplicationDbContextModelSnapshot.cs
-=======
-
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
->>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/ApplicationDbContextModelSnapshot.cs
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
@@ -286,14 +278,6 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-<<<<<<< HEAD:Migrations/ApplicationDbContextModelSnapshot.cs
-=======
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
-
->>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/ApplicationDbContextModelSnapshot.cs
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2")
                         .HasComment("Data atualização");
@@ -306,7 +290,6 @@ namespace Inspecoes.Migrations.ApplicationDb
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
-<<<<<<< HEAD:Migrations/ApplicationDbContextModelSnapshot.cs
 
                     b.HasKey("Id");
 
@@ -333,8 +316,6 @@ namespace Inspecoes.Migrations.ApplicationDb
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
-=======
->>>>>>> 36b9700378d648951a43f91254cce7959e881f40:Migrations/ApplicationDb/ApplicationDbContextModelSnapshot.cs
 
                     b.HasKey("Id");
 

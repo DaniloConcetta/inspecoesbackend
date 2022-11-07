@@ -2,25 +2,24 @@
 
 #nullable disable
 
-namespace Inspecoes.Migrations
+namespace Inspecoes.Migrations.ApplicationDb
 {
-    public partial class refact1 : Migration
+    public partial class Refact3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Codigo",
+                name: "Descricao",
                 table: "GruposPerguntas",
-                type: "varchar(20)",
-                maxLength: 20,
-                nullable: false,
-                defaultValue: "");
+                type: "varchar(200)",
+                maxLength: 200,
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Codigo",
+                name: "Descricao",
                 table: "GruposPerguntas");
         }
     }
