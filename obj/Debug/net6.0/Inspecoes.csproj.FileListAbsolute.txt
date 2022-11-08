@@ -955,3 +955,8 @@ C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\obj\Debug\net6.0\refint\Inspec
 C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\obj\Debug\net6.0\Inspecoes.pdb
 C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\obj\Debug\net6.0\Inspecoes.genruntimeconfig.cache
 C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\obj\Debug\net6.0\ref\Inspecoes.dll
+C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\bin\Debug\net6.0\NetDevPack.Security.JwtSigningCredentials.dll
+C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\bin\Debug\net6.0\NetDevPack.Security.JwtSigningCredentials.AspNetCore.dll
+C:\D\NETCore\Cepedi\Positivo\sfc\inspecoesbackend\bin\Debug\net6.0\NetDevPack.Security.JwtSigningCredentials.Store.EntityFrameworkCore.dll
