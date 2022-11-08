@@ -12,5 +12,6 @@ namespace Inspecoes.Interfaces
         bool IsAuthenticated();
         bool IsInRole(string role);
         IEnumerable<Claim> GetClaimsIdentity();
+        HttpContext ObterHttpContext();
     }
 }

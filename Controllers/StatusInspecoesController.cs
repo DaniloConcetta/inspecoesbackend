@@ -32,13 +32,13 @@ namespace Inspecoes.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<StatusInspecao>>> GetAllMe()
         {
             return await _service.GetAll();
         }
 
-        [AllowAnonymous]
+       
         [HttpGet()]
         public async Task<ActionResult<IPagedList<StatusInspecao>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {

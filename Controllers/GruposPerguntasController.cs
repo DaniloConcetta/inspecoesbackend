@@ -33,8 +33,8 @@ namespace Inspecoes.Controllers
             _mapper = mapper;
         }
 
-        [AllowAnonymous]
-        [HttpGet]
+      
+        [HttpGet] //   [AllowAnonymous]
         public async Task<ActionResult<IPagedList<GrupoPergunta>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
             var pagedList = await _grupoPerguntaService.GetPagedList(parameters);
@@ -79,7 +79,7 @@ namespace Inspecoes.Controllers
         public async Task<ActionResult<GrupoPergunta>> PostGrupoPergunta(GrupoPergunta grupoPergunta)
         {
             await _grupoPerguntaService.Insert(grupoPergunta);
-            return CreatedAtAction("GetGrupoPergunta", new { id = grupoPergunta.Id }, grupoPergunta);
+            return grupoPergunta;
         }
 
         [HttpDelete("{id:int}")]

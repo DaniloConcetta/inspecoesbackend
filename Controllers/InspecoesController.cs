@@ -31,7 +31,7 @@ namespace Inspecoes.Controllers
             _mapper = mapper;
         }
 
-        [AllowAnonymous]
+       
         [HttpGet()]
         public async Task<ActionResult<IPagedList<Inspecao>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {

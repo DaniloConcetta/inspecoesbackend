@@ -19,13 +19,13 @@ namespace Inspecoes.Controllers
         private readonly AppSettings _appSettings;
         private readonly AuthService _authService;
 
-        public AuthController(INotifier notifier, IUser appUser,
+        public AuthController(INotifier notifier, IUser aspNetUser,
                               IOptions<AppSettings> appSettings,
                               AuthService authService
-            ) : base(notifier, appUser)
+            ) : base(notifier, aspNetUser)
         {
             _appSettings = appSettings.Value;
-            _authService = authService; 
+            _authService = authService;
         }
 
         [AllowAnonymous]
@@ -35,7 +35,7 @@ namespace Inspecoes.Controllers
            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
            var user = new IdentityUser
-           { UserName = registerUser.Email,
+           { UserName = registerUser.UserName, // registerUser.Email
              Email = registerUser.Email,
              EmailConfirmed = true
            };

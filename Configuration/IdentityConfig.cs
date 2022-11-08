@@ -10,6 +10,7 @@ using System.Text;
 using Inspecoes.Data;
 using Inspecoes.Extensions;
 using Inspecoes.DTOs;
+using NetDevPack.Security.JwtSigningCredentials;
 
 namespace Inspecoes.Configuration
 {
@@ -18,9 +19,7 @@ namespace Inspecoes.Configuration
         public static IServiceCollection AddIdentityConfig(this IServiceCollection services,
             IConfiguration configuration)
         {
-            var appSettingsSection = configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingsSection);
-
+            services.AddJwksManager(op => op.Algorithm = Algorithm.ES256).PersistKeysToDatabaseStore<AppIdentityDbContext>();
 
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("AppIdentityDbContext")));// AppIdentityDbContext
@@ -41,6 +40,9 @@ namespace Inspecoes.Configuration
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             });
+
+            var appSettingsSection = configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
 
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
@@ -66,6 +68,7 @@ namespace Inspecoes.Configuration
 
             return services;
         }
+
 
         public static IApplicationBuilder UseIdentityConfiguration(this IApplicationBuilder app)
         {
