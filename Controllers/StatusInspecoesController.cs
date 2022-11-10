@@ -16,6 +16,7 @@ using Inspecoes.DTOs;
 namespace Inspecoes.Controllers
 {
     [ApiController]
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{ver:apiVersion}/[controller]")]
     public class StatusInspecoesController : MainController
@@ -38,14 +39,12 @@ namespace Inspecoes.Controllers
             return await _service.GetAll();
         }
 
-       
         [HttpGet()]
         public async Task<ActionResult<IPagedList<StatusInspecao>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
             var pagedList = await _service.GetPagedList(parameters);
             return CustomResponse(_mapper.Map<IPagedList<StatusInspecao>>(pagedList));
         }
-
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<StatusInspecao>> GetByIdMe(int id)
@@ -57,7 +56,6 @@ namespace Inspecoes.Controllers
             {
                 return NotFound();
             }
-
             return model;
         }
 
@@ -85,7 +83,6 @@ namespace Inspecoes.Controllers
             {
                 throw;
             }
-
             return NoContent();
         }
 
