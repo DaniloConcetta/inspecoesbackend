@@ -120,7 +120,6 @@ namespace Inspecoes.Repository
         public virtual void InsertNoAsync(TEntity entity)
         {
             DbSet.Add(entity);
-
             SaveChangesNoAsync();
         }
 

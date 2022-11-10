@@ -6,6 +6,7 @@ using Inspecoes.Interfaces;
 using Inspecoes.Data;
 using Inspecoes.Repository;
 using Inspecoes.Extensions;
+using Inspecoes.Utils;
 //using Inspecoes.Notifications;
 //using Inspecoes.Services;
 
@@ -38,7 +39,7 @@ namespace Inspecoes.Configuration
 
             // services.AddScoped<IUserRepository, UserRepository>();
             // services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-
+            services.AddScoped<IFileUtil, FileUtil>();
             services.AddScoped<INotifier, Notifier>();
             // services.AddScoped<IUserService, UserService>();
             // services.AddScoped<IUserProfileService, UserProfileService>();
