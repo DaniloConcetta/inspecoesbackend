@@ -46,7 +46,6 @@ namespace Inspecoes.Controllers
             return CustomResponse(_mapper.Map<IPagedList<StatusInspecao>>(pagedList));
         }
 
-
         [HttpGet("{id:int}")]
         public async Task<ActionResult<StatusInspecao>> GetByIdMe(int id)
         {
@@ -57,7 +56,6 @@ namespace Inspecoes.Controllers
             {
                 return NotFound();
             }
-
             return model;
         }
 
@@ -85,7 +83,6 @@ namespace Inspecoes.Controllers
             {
                 throw;
             }
-
             return NoContent();
         }
 

@@ -6,16 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Inspecoes.Models;
+using NetDevPack.Security.JwtSigningCredentials.Store.EntityFrameworkCore;
+using NetDevPack.Security.JwtSigningCredentials;
 
 namespace Inspecoes.Data
 {
-    public class AppIdentityDbContext : IdentityDbContext
+    public class AppIdentityDbContext : IdentityDbContext, ISecurityKeyContext
         //<CustomUser, CustomRole, string, CustomUserClaim, CustomUserRole,
         //CustomUserLogin, CustomRoleClaim, CustomUserToken>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) { }
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<SecurityKeyWithPrivate> SecurityKeys { get; set; }
 
         /*
                 protected override void OnModelCreating(ModelBuilder builder)

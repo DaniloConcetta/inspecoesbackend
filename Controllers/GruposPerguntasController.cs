@@ -14,7 +14,6 @@ using Inspecoes.DTOs;
 
 namespace Inspecoes.Controllers
 {
-
     [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{ver:apiVersion}/[controller]")]
@@ -32,9 +31,8 @@ namespace Inspecoes.Controllers
             _grupoPerguntaService = grupoPerguntaService;
             _mapper = mapper;
         }
-
-        [AllowAnonymous]
-        [HttpGet]
+      
+        [HttpGet] //   [AllowAnonymous]
         public async Task<ActionResult<IPagedList<GrupoPergunta>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
             var pagedList = await _grupoPerguntaService.GetPagedList(parameters);
@@ -44,9 +42,7 @@ namespace Inspecoes.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<GrupoPergunta>> GetDetailsById(int id)  
         {
-            //var grupoPergunta = await _context.GruposPerguntas.FindAsync(id);
             var grupoPergunta = await _grupoPerguntaService.GetDetailsById(id);
-            //var grupoPergunta = await _grupoPerguntaRepository.ObterPerguntasGrupoPergunta(id);
 
             if (grupoPergunta == null)
             {
@@ -71,7 +67,6 @@ namespace Inspecoes.Controllers
             {
               throw;
             }
-
             return NoContent();
         }
 
@@ -79,7 +74,7 @@ namespace Inspecoes.Controllers
         public async Task<ActionResult<GrupoPergunta>> PostGrupoPergunta(GrupoPergunta grupoPergunta)
         {
             await _grupoPerguntaService.Insert(grupoPergunta);
-            //return CreatedAtAction("GetGrupoPergunta", new { id = grupoPergunta.Id }, grupoPergunta);
+
             return grupoPergunta;
         }
 
@@ -93,10 +88,7 @@ namespace Inspecoes.Controllers
             }
 
             await _grupoPerguntaService.Delete(id);
-
-            return NoContent();
+                        return NoContent();
         }
-
-
     }
 }

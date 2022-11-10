@@ -40,9 +40,14 @@ namespace Inspecoes.Extensions
             return _accessor.HttpContext.User.IsInRole(role);
         }
 
-        public IEnumerable<Claim> GetClaimsIdentity()
+        public IEnumerable<Claim> GetClaimsIdentity() 
         {
             return _accessor.HttpContext.User.Claims;
+        }
+
+        public HttpContext ObterHttpContext()
+        {
+            return _accessor.HttpContext;
         }
     }
 

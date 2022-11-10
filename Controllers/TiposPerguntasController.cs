@@ -70,7 +70,7 @@ namespace Inspecoes.Controllers
             return model;
         }
 
-        [ClaimsAuthorize("TiposPerguntas", "Put")]
+       // [ClaimsAuthorize("TiposPerguntas", "Put")]
         [HttpPut("{id:int}")] // PUT: api/Criterios/5
         public async Task<IActionResult> PutMe(int id, TipoPergunta model)
         {
@@ -92,7 +92,7 @@ namespace Inspecoes.Controllers
             return NoContent();
         }
 
-        [ClaimsAuthorize("TiposPerguntas", "Delete")]
+      //  [ClaimsAuthorize("TiposPerguntas", "Delete")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteMe(int id)
         {

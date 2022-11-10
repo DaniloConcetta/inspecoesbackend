@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Inspecoes.Extensions;
 using System.Text.Json.Serialization;
+using NetDevPack.Security.JwtSigningCredentials.AspNetCore;
 //using AutoMapper.EquivalencyExpression;
 
 
@@ -84,26 +85,27 @@ namespace Inspecoes.Configuration
         {
             if (env.IsDevelopment())
             {
-                app.UseCors("Development");
+              //app.UseCors("Development");
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseCors("Production"); // Usar apenas nas demos => Configuração Ideal: Production
+              //app.UseCors("Production"); 
                 app.UseHsts();
             }
 
             //app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
+           
             app.UseAuthentication();
             app.UseAuthorization();
             // app.UseStaticFiles();
-
-            /*
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                /*
                 endpoints.MapHealthChecks("/api/hc", new HealthCheckOptions()
                 {
                     Predicate = _ => true,
@@ -118,10 +120,11 @@ namespace Inspecoes.Configuration
                     options.UseRelativeResourcesPath = false;
                     options.UseRelativeWebhookPath = false;
                 });
-
+                */
             });
-            */
+            
 
+            app.UseJwksDiscovery("/jwks");
             return app;
         }
     }
