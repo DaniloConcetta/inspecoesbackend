@@ -16,6 +16,7 @@ using Inspecoes.DTOs;
 namespace Inspecoes.Controllers
 {
     [ApiController]
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{ver:apiVersion}/[controller]")]
     public class StatusInspecoesController : MainController
@@ -32,13 +33,12 @@ namespace Inspecoes.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<StatusInspecao>>> GetAllMe()
         {
             return await _service.GetAll();
         }
 
-        [AllowAnonymous]
         [HttpGet()]
         public async Task<ActionResult<IPagedList<StatusInspecao>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {

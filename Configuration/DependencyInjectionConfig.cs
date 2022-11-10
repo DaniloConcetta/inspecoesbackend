@@ -29,10 +29,15 @@ namespace Inspecoes.Configuration
             services.AddScoped<IGrupoProdutoRepository, GrupoProdutoRepository>();
 
             services.AddScoped<IOpRepository, OpRepository>();
+            services.AddScoped<IOpService, OpService>();
+
             services.AddScoped<IStatusInspecaoRepository, StatusInspecaoRepository>();
             services.AddScoped<IStatusInspecaoService, StatusInspecaoService>();
             services.AddScoped<IInspecaoRepository, InspecaoRepository>();
             services.AddScoped<IInspecaoService, InspecaoService>();
+            services.AddScoped<IInspecaoItemRepository, InspecaoItemRepository>();
+            services.AddScoped<IInspecaoItemService, InspecaoItemService>();
+            services.AddScoped<IInspecaoLaudoService, InspecaoLaudoService>();
 
             services.AddScoped<IGrupoProdutoService, GrupoProdutoService>();
 

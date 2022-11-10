@@ -30,7 +30,6 @@ namespace Inspecoes.Controllers
             _service = service;
             _mapper = mapper;
         }
-
        
         [HttpGet()] // [AllowAnonymous]
         public async Task<ActionResult<IPagedList<Pergunta>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
@@ -49,7 +48,6 @@ namespace Inspecoes.Controllers
             }
             return response;
         }
-
 
         [HttpPost]
         public async Task<ActionResult<Pergunta>> PostMe(Pergunta model)

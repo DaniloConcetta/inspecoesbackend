@@ -4,6 +4,7 @@ using Inspecoes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inspecoes.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221107221057_Refact4")]
+    partial class Refact4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,9 +178,6 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.Property<int?>("StatusInspecaoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("User")
-                        .HasColumnType("varchar(100)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("GrupoPerguntaId");
@@ -210,7 +209,7 @@ namespace Inspecoes.Migrations.ApplicationDb
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<int>("InspecaoId")
+                    b.Property<int?>("InspecaoId")
                         .HasColumnType("int");
 
                     b.Property<bool?>("Nao")
@@ -220,14 +219,11 @@ namespace Inspecoes.Migrations.ApplicationDb
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<int>("PerguntaId")
+                    b.Property<int?>("PerguntaId")
                         .HasColumnType("int");
 
                     b.Property<bool?>("Sim")
                         .HasColumnType("bit");
-
-                    b.Property<string>("User")
-                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -307,11 +303,7 @@ namespace Inspecoes.Migrations.ApplicationDb
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("LaudoNao")
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("LaudoSim")
+                    b.Property<string>("LaudoFinal")
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
@@ -436,13 +428,11 @@ namespace Inspecoes.Migrations.ApplicationDb
                 {
                     b.HasOne("Inspecoes.Models.Inspecao", "Inspecao")
                         .WithMany()
-                        .HasForeignKey("InspecaoId")
-                        .IsRequired();
+                        .HasForeignKey("InspecaoId");
 
                     b.HasOne("Inspecoes.Models.Pergunta", "Pergunta")
                         .WithMany()
-                        .HasForeignKey("PerguntaId")
-                        .IsRequired();
+                        .HasForeignKey("PerguntaId");
 
                     b.Navigation("Inspecao");
 

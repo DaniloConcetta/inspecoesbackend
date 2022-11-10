@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Inspecoes.Data;
 using Inspecoes.Models;
 using Inspecoes.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Inspecoes.Controllers
 {
-    [Route("api/protheus/[controller]")]
     [ApiController]
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Route("api/v{ver:apiVersion}/protheus/[controller]")]  //[Route("api/[controller]")] 
     public class OpProtheusController : ControllerBase
     {
         private readonly IOpPService _opPService;
@@ -21,14 +24,12 @@ namespace Inspecoes.Controllers
             _opPService = opPService;
         }
 
-        // GET: api/GrupoProdutoProtheus/5
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<OpProtheus>>> GetOpProtheus()
+        [HttpPost("atualizar")]
+        public async Task<ActionResult<bool>> PostMe(bool boolean)
         {
             var resposta = await _opPService.OpProtheus();
-
-            return Ok();
+            return boolean;
         }
-
     }
 }
+

@@ -64,5 +64,7 @@ namespace Inspecoes.Data
             return base.SaveChangesAsync(cancellationToken);
         }
 
+        public DbSet<Inspecoes.Models.InspecaoItem> InspecaoItem { get; set; }
+
     }
 }

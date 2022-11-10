@@ -9,6 +9,7 @@ namespace Inspecoes.Models
     {
         public Inspecao() { }
 
+        public String? User { get; set; }
         public int? Quantidade { get; set; }
 
         public int? StatusInspecaoId { get; set; }
@@ -18,7 +19,11 @@ namespace Inspecoes.Models
         //Relacionamentos
         [JsonIgnore]
         public StatusInspecao? statusInspecao { get; set; }
+
+        [JsonIgnore]
         public Op? op { get; set; }
+
+        [JsonIgnore]
         public GrupoPergunta? grupoPergunta { get; set; }
     }
 }

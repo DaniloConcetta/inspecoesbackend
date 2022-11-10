@@ -7,40 +7,41 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Inspecoes.Data;
 using Inspecoes.Models;
-using Microsoft.AspNetCore.Authorization;
-using AutoMapper;
 using Inspecoes.Interfaces;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Inspecoes.DTOs;
 
 namespace Inspecoes.Controllers
 {
-    [Authorize]
+    [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{ver:apiVersion}/[controller]")]  //[Route("api/[controller]")] 
-    [ApiController]
-    public class OpsController : MainController
+    public class InspecaoItensController : MainController
     {
-        private readonly IOpService _service;
+        private readonly IInspecaoItemService _service;
         private readonly IMapper _mapper;
 
-        public OpsController(IOpService service,
+        public InspecaoItensController(IInspecaoItemService service,
                                    IMapper mapper,
                                    INotifier notificador,
                                    IUser user) : base(notificador, user)
         {
             _service = service;
             _mapper = mapper;
+            //user.GetUserEmail
         }
 
-        [HttpGet()] // [AllowAnonymous]
-        public async Task<ActionResult<IPagedList<Op>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
+       
+        [HttpGet()]
+        public async Task<ActionResult<IPagedList<InspecaoItem>>> GetPagedList([FromQuery] FilteredPagedListParameters parameters)
         {
             var pagedList = await _service.GetPagedList(parameters);
-            return CustomResponse(_mapper.Map<IPagedList<Op>>(pagedList));
+            return CustomResponse(_mapper.Map<IPagedList<InspecaoItem>>(pagedList));
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Op>> GetByIdMe(int id)
+        public async Task<ActionResult<InspecaoItem>> GetByIdMe(int id)
         {
             var response = await _service.GetById(id);
             if (response == null)
@@ -50,20 +51,23 @@ namespace Inspecoes.Controllers
             return response;
         }
 
+
         [HttpPost]
-        public async Task<ActionResult<Op>> PostMe(Op model)
+        public async Task<ActionResult<InspecaoItem>> PostMe(InspecaoItem model)
         {
             await _service.Insert(model);
             return model;
         }
 
+
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Op>> PutMe(int id, Op model)
+        public async Task<ActionResult<InspecaoItem>> PutMe(int id, InspecaoItem model)
         {
             if (id != model.Id)
             {
                 return BadRequest();
             }
+
             try
             {
                 await _service.Update(model);
@@ -72,6 +76,7 @@ namespace Inspecoes.Controllers
             {
                 throw;
             }
+
             return model; // NoContent();//melhorar pois o retorno ideal é o retorno completo do model
         }
 
@@ -81,10 +86,6 @@ namespace Inspecoes.Controllers
             await _service.Delete(id);
             return NoContent();
         }
-        /*
-        private bool OpExists(int id)
-        {
-            return _context.Op.Any(e => e.Id == id);
-        }*/
+
     }
 }

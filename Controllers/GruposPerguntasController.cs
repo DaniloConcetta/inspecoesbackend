@@ -79,7 +79,8 @@ namespace Inspecoes.Controllers
         public async Task<ActionResult<GrupoPergunta>> PostGrupoPergunta(GrupoPergunta grupoPergunta)
         {
             await _grupoPerguntaService.Insert(grupoPergunta);
-            return CreatedAtAction("GetGrupoPergunta", new { id = grupoPergunta.Id }, grupoPergunta);
+            //return CreatedAtAction("GetGrupoPergunta", new { id = grupoPergunta.Id }, grupoPergunta);
+            return grupoPergunta;
         }
 
         [HttpDelete("{id:int}")]
