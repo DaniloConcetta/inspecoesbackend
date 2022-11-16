@@ -13,7 +13,7 @@ using Inspecoes.Utils;
 namespace Inspecoes.Configuration
 {
     public static class DependencyInjectionConfig
-    {
+    { 
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
             services.AddScoped<ApplicationDbContext>();
@@ -50,6 +50,7 @@ namespace Inspecoes.Configuration
             // services.AddScoped<IUserProfileService, UserProfileService>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+     
             services.AddScoped<AuthService>();
             services.AddScoped<IUser, AspNetUser>(); 
 

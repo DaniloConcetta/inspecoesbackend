@@ -29,14 +29,35 @@ namespace Inspecoes.Controllers
         }
 
         [HttpGet("[action]")]
-         public async Task<ActionResult<Object>> GetFileExcel(int id = 0)
+         public async Task<ActionResult<Object>> GetFileHtml(int id = 0)
         {
-            HttpContext.Response.Headers.Add("content-disposition", "attachment; filename=Information" + DateTime.Now.Year.ToString() + ".xls");
-            this.Response.ContentType = "application/vnd.ms-excel";
+            HttpContext.Response.Headers.Add("content-disposition", "attachment; filename=Information" + DateTime.Now.ToString() + ".html");
+            this.Response.ContentType = "application/html";
+            
             FileContentResult fileContentResulToExport;
-            fileContentResulToExport = _FileUtil.GenerateExcelPergunta(id);
+            fileContentResulToExport = _FileUtil.GenerateHtmlPergunta(id);
             return fileContentResulToExport;
         }
-    
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult<Object>> GetFilePdf(int id = 0)
+        {
+            HttpContext.Response.Headers.Add("content-disposition", "attachment; filename=Information" + DateTime.Now.ToString() + ".pdf");
+            this.Response.ContentType = "application/pdf";
+            FileContentResult fileContentResulToExport;
+            fileContentResulToExport = _FileUtil.GeneratePdfPergunta();
+            return fileContentResulToExport;
+        }
+
+        [HttpGet("[action]")]
+        public async Task<ActionResult<Object>> GetFileXlsx(int id = 0)
+        {
+            HttpContext.Response.Headers.Add("content-disposition", "attachment; filename=Information" + DateTime.Now.ToString() + ".xlsx");
+            this.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            FileContentResult fileContentResulToExport;
+            fileContentResulToExport = _FileUtil.GenerateXlsxSample();
+            return fileContentResulToExport;
+        }
+
     }
 }

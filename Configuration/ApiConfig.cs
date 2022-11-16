@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Inspecoes.Extensions;
 using System.Text.Json.Serialization;
 using NetDevPack.Security.JwtSigningCredentials.AspNetCore;
+using Inspecoes.Services;
 //using AutoMapper.EquivalencyExpression;
 
 
@@ -19,7 +20,7 @@ namespace Inspecoes.Configuration
     {
         public static IServiceCollection AddApiConfig(this IServiceCollection services)
         {
-           
+          
             services.Configure<RouteOptions>(options =>
             {
                 options.LowercaseUrls = true;
@@ -77,6 +78,8 @@ namespace Inspecoes.Configuration
                 //.AllowAnyHeader());
                 //VERIFICAR CORS - FUTURAMENTE
             });
+
+            services.AddHostedService<TimedHostedService>();
 
             return services;
         }
