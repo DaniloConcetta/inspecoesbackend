@@ -10,7 +10,20 @@ namespace Inspecoes.Interfaces
 {
     public interface IFileUtil : IDisposable
     {
-        FileContentResult GenerateExcelQuestionario(int id);
-        FileContentResult GenerateExcelLaudo(int id);
+
+        FileContentResult GenerateHtmlQuestionario(int id);
+        FileContentResult GenerateHtmlLaudo(int id);
+
+        FileContentResult GenerateXlsxQuestionario(int id);
+        FileContentResult GenerateXlsxLaudo(int id);
+
+        FileContentResult GeneratePdfQuestionario(int id);
+        FileContentResult GeneratePdfLaudo(int id);
+
+        /*
+                FileContentResult GenerateHtmlPergunta(int id);
+                FileContentResult GeneratePdfPergunta();
+                FileContentResult GenerateXlsxSample();
+        */
     }
 }

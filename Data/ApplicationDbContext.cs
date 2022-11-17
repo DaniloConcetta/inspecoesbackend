@@ -20,6 +20,7 @@ namespace Inspecoes.Data
         public DbSet<Op> Op { get; set; }
         public DbSet<StatusInspecao> StatusInspecao { get; set; }
         public DbSet<Inspecao> Inspecao { get; set; }
+        public DbSet<InspecaoItem> InspecaoItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,7 +65,7 @@ namespace Inspecoes.Data
             return base.SaveChangesAsync(cancellationToken);
         }
 
-        public DbSet<Inspecoes.Models.InspecaoItem> InspecaoItem { get; set; }
+        
 
     }
 }

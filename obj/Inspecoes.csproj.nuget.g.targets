@@ -2,6 +2,9 @@
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.apidescription.server\3.0.0\build\Microsoft.Extensions.ApiDescription.Server.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.apidescription.server\3.0.0\build\Microsoft.Extensions.ApiDescription.Server.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.packaging.tools\1.0.0-preview1-25301-01\build\Microsoft.Packaging.Tools.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.packaging.tools\1.0.0-preview1-25301-01\build\Microsoft.Packaging.Tools.targets')" />
+    <Import Project="$(NuGetPackageRoot)netstandard.library\2.0.0-preview1-25301-01\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('$(NuGetPackageRoot)netstandard.library\2.0.0-preview1-25301-01\build\netstandard2.0\NETStandard.Library.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\6.0.10\buildTransitive\Microsoft.AspNetCore.Identity.UI.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.aspnetcore.identity.ui\6.0.10\buildTransitive\Microsoft.AspNetCore.Identity.UI.targets')" />
+    <Import Project="$(NuGetPackageRoot)ironpdf.native.chrome.windows\2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets" Condition="Exists('$(NuGetPackageRoot)ironpdf.native.chrome.windows\2022.11.10299\build\IronPdf.Native.Chrome.Windows.targets')" />
   </ImportGroup>
 </Project>
