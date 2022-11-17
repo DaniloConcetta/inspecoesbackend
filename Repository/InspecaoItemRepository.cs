@@ -16,6 +16,10 @@ namespace Inspecoes.Repository
             return await DbSet.Where(p => p.InspecaoId == idInspecao).ToListAsync();
         }
 
+        public async Task<List<InspecaoItem>> GetAllInspecao(int idInspecao)
+        {
+            return await DbSet.Where(p => p.InspecaoId == idInspecao).ToListAsync();
+        }
 
     }
 }

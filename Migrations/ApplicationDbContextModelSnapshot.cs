@@ -4,18 +4,16 @@ using Inspecoes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Inspecoes.Migrations.ApplicationDb
+namespace Inspecoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221109223654_Refact6")]
-    partial class Refact6
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,6 +176,9 @@ namespace Inspecoes.Migrations.ApplicationDb
                     b.Property<int?>("StatusInspecaoId")
                         .HasColumnType("int");
 
+                    b.Property<string>("User")
+                        .HasColumnType("varchar(100)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("GrupoPerguntaId");
@@ -224,6 +225,9 @@ namespace Inspecoes.Migrations.ApplicationDb
 
                     b.Property<bool?>("Sim")
                         .HasColumnType("bit");
+
+                    b.Property<string>("User")
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 

@@ -9,8 +9,8 @@ namespace Inspecoes.Models
         public InspecaoItem() { }
 
         public String? User { get; set; }
-        public bool? Sim { get; set; }
-        public bool? Nao { get; set; }
+        public bool Sim { get; set; }
+        public bool Nao { get; set; }
 
         [StringLength(200, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
         public String? Descritivo { get; set; }

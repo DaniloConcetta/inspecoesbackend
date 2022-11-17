@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Inspecoes.Migrations.ApplicationDb
+namespace Inspecoes.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221110130218_Refact7")]
-    partial class Refact7
+    [Migration("20221116140411_Inicio")]
+    partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

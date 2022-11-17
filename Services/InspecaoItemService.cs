@@ -25,12 +25,17 @@ namespace Inspecoes.Services
             return _repository.GetAll();
         }
 
+        /*public Task<List<InspecaoItem>> GetAllInspecao()
+        {
+            return _repository.GetAllInspecao();
+        }*/
+
         public Task<InspecaoItem> GetById(int id)
         {
             return _repository.GetById(id); 
         }
 
-         public async Task Insert(InspecaoItem model)
+        public async Task Insert(InspecaoItem model)
         {
 
             //if (!RunValidation(new CriterioValidation(), criterio)) return; //
